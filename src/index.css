@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Outfit:wght@300;400;500;600;900&family=Inter:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Abril Fatface", serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-cafe-dark: #1e3932;
+  --color-cafe-brown: #006241;
+  --color-cafe-gold: #00704a;
+  --color-cafe-cream: #d4e9e2;
+  --color-cafe-light: #f7f7f7;
+}
+
+@layer base {
+  body {
+    @apply bg-cafe-light text-cafe-dark font-sans selection:bg-cafe-brown selection:text-white;
+    background-image: radial-gradient(circle at 50% 50%, rgba(111, 78, 55, 0.05) 0%, transparent 100%);
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-sans font-black tracking-tight;
+  }
+}
+
+.shiny-card {
+  @apply relative overflow-hidden bg-white border border-cafe-brown/5 shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-cafe-brown/10;
+}
+
+.shiny-card::after {
+  content: '';
+  @apply absolute inset-0 bg-linear-to-tr from-white/30 via-transparent to-transparent pointer-events-none;
+}
+
+.shiny-button {
+  @apply relative overflow-hidden bg-cafe-brown text-white transition-all hover:bg-cafe-dark active:scale-95 shadow-xl shadow-cafe-brown/20 uppercase tracking-[0.2em] text-xs font-black py-4 px-8 rounded-full;
+}
+
+.shiny-button::before {
+  content: '';
+  @apply absolute top-0 -left-full w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] transition-all duration-700 group-hover:left-full;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-cafe-light;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-cafe-gold/50 rounded-full hover:bg-cafe-gold;
+}

@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Validation for Message
+    function isValidMessage(data) {
+      return data.keys().hasAll(['firstName', 'lastName', 'email', 'subject', 'message', 'createdAt'])
+        && data.keys().size() == 6
+        && data.firstName is string && data.firstName.size() >= 1 && data.firstName.size() <= 100
+        && data.lastName is string && data.lastName.size() >= 1 && data.lastName.size() <= 100
+        && data.email is string && data.email.size() >= 5 && data.email.size() <= 200
+        && data.subject is string && data.subject.size() >= 1 && data.subject.size() <= 200
+        && data.message is string && data.message.size() >= 1 && data.message.size() <= 2000
+        && data.createdAt == request.time;
+    }
+
+    // Validation for Order
+    function isValidOrder(data) {
+      return data.keys().hasAll(['fullName', 'email', 'address', 'experience', 'status', 'createdAt'])
+        && data.keys().size() == 6
+        && data.fullName is string && data.fullName.size() >= 1 && data.fullName.size() <= 200
+        && data.email is string && data.email.size() >= 5 && data.email.size() <= 200
+        && data.address is string && data.address.size() >= 1 && data.address.size() <= 1000
+        && data.experience in ['One-time Purchase', 'Monthly Subscription']
+        && data.status in ['pending', 'completed']
+        && data.createdAt == request.time;
+    }
+
+    // Collections
+    match /messages/{messageId} {
+      allow create: if isValidId(messageId) && isValidMessage(incoming());
+      // No public read/update/delete
+    }
+
+    match /orders/{orderId} {
+      allow create: if isValidId(orderId) && isValidOrder(incoming());
+      // No public read/update/delete
+    }
+  }
+}

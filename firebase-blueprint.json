@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "Message": {
+      "title": "Contact Message",
+      "description": "User submitted message from contact form",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["firstName", "lastName", "email", "message", "createdAt"]
+    },
+    "Order": {
+      "title": "Coffee Order",
+      "description": "User submitted coffee order",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "address": { "type": "string" },
+        "experience": { "type": "string", "enum": ["One-time Purchase", "Monthly Subscription"] },
+        "status": { "type": "string", "enum": ["pending", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "email", "address", "experience", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "messages/{messageId}": {
+      "schema": "Message",
+      "description": "Contact form submissions"
+    },
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Ordering form submissions"
+    }
+  }
+}
