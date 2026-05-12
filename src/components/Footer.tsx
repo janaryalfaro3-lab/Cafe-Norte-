@@ -2,69 +2,80 @@ import { Coffee, Instagram, Facebook, Twitter, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-cafe-brown text-white py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+    <footer className="bg-[#050807] text-white py-32 px-4 relative overflow-hidden border-t border-white/5">
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cafe-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-24">
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="relative w-12 h-12 flex items-center justify-center shrink-0">
+            <div className="flex items-center gap-4 mb-10 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <div className="relative w-16 h-16 flex items-center justify-center shrink-0">
+                <div className="absolute inset-0 bg-cafe-gold/20 rounded-full blur-md group-hover:bg-cafe-gold/40 transition-colors" />
                 <img 
-                  src="https://scontent.fmnl17-6.fna.fbcdn.net/v/t39.30808-1/679835132_122093239365299350_5498513086116890739_n.jpg?stp=c212.0.1624.1624a_dst-jpg_s200x200_tt6&_nc_cat=109&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=kii5IuFw4zIQ7kNvwG6zCpq&_nc_oc=AdqFE3fg_NU-Y9eYe288lyI_TID3mMD36odgVV7QmjQPWlKmPA23wfw0FKIc038XoFo&_nc_zt=24&_nc_ht=scontent.fmnl17-6.fna&_nc_gid=nyFsuVC0u3ZwWPZQgwr86Q&_nc_ss=7b2a8&oh=00_Af103ATDcGsoQI4AYUEJWWo_oyadJoJd8yzDX0FClx7ANA&oe=69F36A77" 
+                  src="https://i.pinimg.com/736x/b4/7c/79/b47c797a767c5ed1cadb64ced39d23cf.jpg" 
                   alt="Cafe Norte Logo" 
-                  className="w-full h-full object-cover rounded-full border border-white/20"
+                  className="w-full h-full object-cover rounded-full border-2 border-cafe-gold relative z-10 hover:scale-110 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
                 />
               </div>
-              <span className="font-black text-xl tracking-tight">CAFE NORTE</span>
+              <div className="flex flex-col">
+                <span className="font-black text-2xl tracking-tighter uppercase italic text-white group-hover:text-cafe-gold transition-colors">Cafe Norte</span>
+                <span className="text-[7px] font-black tracking-[0.4em] text-cafe-gold uppercase">Authentic Italian</span>
+              </div>
             </div>
-            <p className="text-white/70 text-sm leading-relaxed mb-8 font-medium">
-              A minimalist coffee sanctuary dedicated to the craft of small-batch roasting and the community of dreamers.
+            <p className="text-white/40 text-sm leading-relaxed mb-10 font-medium italic">
+              "A minimalist coffee sanctuary dedicated to the craft of small-batch roasting and the community of dreamers."
             </p>
             <div className="flex gap-4">
               {[Instagram, Facebook, Twitter].map((Icon, idx) => (
-                <a key={idx} href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-cafe-gold hover:border-cafe-gold transition-all text-white/50 hover:text-white">
-                  <Icon size={20} />
+                <a key={idx} href="#" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cafe-gold hover:border-cafe-gold transition-all duration-500 text-white/30 hover:text-white shadow-xl group">
+                  <Icon size={20} className="group-hover:scale-125 transition-transform" />
                 </a>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-black text-xs uppercase tracking-[0.2em] mb-8 text-white">Quick Links</h4>
-            <ul className="space-y-4 text-white/50 text-sm font-bold">
-              <li><a href="#order" className="hover:text-cafe-gold transition-colors">Order Online</a></li>
-              <li><a href="#gallery" className="hover:text-cafe-gold transition-colors">Ambiance Gallery</a></li>
-              <li><a href="#blog" className="hover:text-cafe-gold transition-colors">Coffee Benefits</a></li>
-              <li><a href="#contact" className="hover:text-cafe-gold transition-colors">Contact Us</a></li>
+            <h4 className="font-black text-[10px] uppercase tracking-[0.4em] mb-10 text-cafe-gold">Explore</h4>
+            <ul className="space-y-6 text-white/40 text-sm font-black uppercase tracking-widest">
+              <li><a href="#order" className="hover:text-white transition-colors flex items-center gap-2 group"><div className="w-0 h-px bg-cafe-gold group-hover:w-4 transition-all" /> Ordering</a></li>
+              <li><a href="#gallery" className="hover:text-white transition-colors flex items-center gap-2 group"><div className="w-0 h-px bg-cafe-gold group-hover:w-4 transition-all" /> Gallery</a></li>
+              <li><a href="#blog" className="hover:text-white transition-colors flex items-center gap-2 group"><div className="w-0 h-px bg-cafe-gold group-hover:w-4 transition-all" /> Benefits</a></li>
+              <li><a href="#contact" className="hover:text-white transition-colors flex items-center gap-2 group"><div className="w-0 h-px bg-cafe-gold group-hover:w-4 transition-all" /> Connect</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-black text-xs uppercase tracking-[0.2em] mb-8 text-white">Shop Info</h4>
-            <ul className="space-y-4 text-white/50 text-sm font-bold">
-              <li>Open 24 Hours</li>
-              <li>7 Days a Week</li>
-              <li>Brgy. San Rafael, Tarlac City</li>
-              <li>Philippines</li>
+            <h4 className="font-black text-[10px] uppercase tracking-[0.4em] mb-10 text-cafe-gold">The Sanctuary</h4>
+            <ul className="space-y-6 text-white/40 text-sm font-black uppercase tracking-widest leading-relaxed">
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-cafe-primary rounded-full animate-pulse" /> Open 24/7</li>
+              <li>San Rafael, Tarlac City</li>
+              <li>Tarlac, Philippines 2300</li>
+              <li className="text-white/60">0976 442 1242</li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-black text-xs uppercase tracking-[0.2em] mb-8 text-white">Stay Updated</h4>
-            <p className="text-white/50 text-sm mb-6 font-medium">Join our mailing list for secret blends and event invites.</p>
-            <div className="flex bg-white/5 rounded-2xl border border-white/10 overflow-hidden focus-within:border-cafe-gold transition-colors">
-              <input type="email" placeholder="email@example.ph" className="bg-transparent px-6 py-4 text-sm focus:outline-none flex-1 placeholder:text-white/20" />
-              <button className="p-4 text-cafe-gold hover:bg-cafe-gold hover:text-white transition-all">
+            <h4 className="font-black text-[10px] uppercase tracking-[0.4em] mb-10 text-cafe-gold">The Society</h4>
+            <p className="text-white/40 text-sm mb-8 font-medium italic">"Join the inner circle for artisan secrets and exclusive cupping invites."</p>
+            <div className="flex bg-white/5 rounded-2xl border border-white/10 overflow-hidden focus-within:border-cafe-gold transition-all shadow-2xl backdrop-blur-xl">
+              <input type="email" placeholder="email@norte.ph" className="bg-transparent px-8 py-5 text-xs font-black focus:outline-none flex-1 placeholder:text-white/10 text-white uppercase tracking-widest" />
+              <button className="px-6 text-cafe-gold hover:bg-cafe-gold hover:text-white transition-all transform active:scale-95">
                 <Mail size={24} />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] text-white/20 font-black">
-          <div>© 2026 Cafe Norte Coffee Co. All rights reserved.</div>
-          <div className="flex gap-10">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
+        <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[8px] uppercase tracking-[0.5em] text-white/20 font-black">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <span className="text-cafe-gold/40">© 2026 Cafe Norte Coffee Co.</span>
+            <span className="hidden md:block text-white/5">|</span>
+            <span className="italic">Crafted by Master Baster</span>
+          </div>
+          <div className="flex gap-12">
+            <a href="#" className="hover:text-white transition-colors hover:tracking-[0.7em] duration-500">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors hover:tracking-[0.7em] duration-500">Terms</a>
           </div>
         </div>
       </div>

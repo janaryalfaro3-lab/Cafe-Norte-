@@ -6,17 +6,17 @@
   --font-serif: "Abril Fatface", serif;
   --font-body: "Inter", sans-serif;
 
-  --color-cafe-dark: #1e3932;
-  --color-cafe-brown: #006241;
-  --color-cafe-gold: #00704a;
-  --color-cafe-cream: #d4e9e2;
-  --color-cafe-light: #f7f7f7;
+  --color-cafe-dark: #0b1411;
+  --color-cafe-brown: #1e3932;
+  --color-cafe-gold: #c9a050;
+  --color-cafe-primary: #006241;
+  --color-cafe-cream: #f4f1e6;
+  --color-cafe-light: #fafaf5;
 }
 
 @layer base {
   body {
-    @apply bg-cafe-light text-cafe-dark font-sans selection:bg-cafe-brown selection:text-white;
-    background-image: radial-gradient(circle at 50% 50%, rgba(111, 78, 55, 0.05) 0%, transparent 100%);
+    @apply bg-cafe-dark text-white font-sans selection:bg-cafe-gold selection:text-black;
   }
   
   h1, h2, h3, h4 {

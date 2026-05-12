@@ -39,26 +39,31 @@ export default function Loyalty() {
   };
 
   return (
-    <section className="py-24 px-4 bg-cafe-cream/60 backdrop-blur-sm relative overflow-hidden">
+    <section className="py-32 px-4 bg-cafe-dark relative overflow-hidden">
       {/* Decorative background circle */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-cafe-brown/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white/40 rounded-full blur-3xl" />
+      <div className="absolute -top-24 -right-24 w-[600px] h-[600px] bg-cafe-primary/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-[600px] h-[600px] bg-cafe-gold/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-cafe-brown font-black uppercase tracking-[0.3em] text-xs mb-4 block">Membership</span>
-            <h2 className="text-4xl md:text-5xl font-black text-cafe-dark mb-6 leading-tight">
-              The Norte <br /> <span className="italic font-normal text-cafe-brown">Star Society</span>
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              whileInView={{ opacity: 1, scaleX: 1 }}
+              className="h-1 w-12 bg-cafe-gold mb-8 hidden lg:block"
+            />
+            <span className="text-cafe-gold font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Membership Experience</span>
+            <h2 className="text-6xl md:text-8xl font-black text-white mb-8 leading-none tracking-tighter uppercase">
+              Star <span className="text-cafe-gold italic underline decoration-white/10 decoration-8 underline-offset-12">Society</span>
             </h2>
-            <p className="text-cafe-dark/70 mb-10 text-lg leading-relaxed font-medium">
-              We believe in rewarding our most dedicated coffee explorers. Join our 
+            <p className="text-white/50 mb-12 text-lg leading-relaxed font-medium italic">
+              "We believe in rewarding our most dedicated coffee explorers. Join our 
               society to unlock exclusive perks, early access to new blends, and 
-              special rewards that make every sip more meaningful.
+              special rewards that make every sip more meaningful."
             </p>
             
             <AnimatePresence mode="wait">
@@ -66,32 +71,34 @@ export default function Loyalty() {
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="bg-cafe-brown text-white p-6 rounded-3xl flex items-center gap-4"
+                  className="bg-cafe-primary text-white p-8 rounded-[2.5rem] flex items-center gap-6 shadow-2xl border border-white/10"
                 >
-                  <Coffee size={24} className="text-cafe-gold" />
-                  <p className="font-bold">Welcome to the Society! Check your inbox soon.</p>
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+                    <Coffee size={24} className="text-white" />
+                  </div>
+                  <p className="font-black uppercase tracking-widest text-xs">Welcome to the Society! Check your inbox soon.</p>
                 </motion.div>
               ) : (
                 <motion.form 
                   onSubmit={handleJoin}
-                  className="flex flex-col sm:flex-row gap-4"
+                  className="flex flex-col sm:flex-row gap-4 relative"
                 >
                   <input 
                     type="email" 
                     placeholder="Enter your email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 bg-white border border-cafe-brown/10 rounded-full px-8 py-5 focus:outline-none focus:border-cafe-gold shadow-lg shadow-cafe-brown/5 text-cafe-dark font-bold placeholder:text-cafe-dark/30"
+                    className="flex-1 bg-white/5 border border-white/10 rounded-full px-10 py-6 focus:outline-none focus:border-cafe-gold transition-all text-white font-bold placeholder:text-white/20 shadow-inner group"
                   />
                   <button 
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="px-10 py-5 bg-cafe-brown text-white rounded-full font-black text-xs uppercase tracking-[0.2em] hover:bg-cafe-dark transition-all shadow-xl shadow-cafe-brown/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="px-12 py-6 bg-cafe-primary text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-cafe-primary/20 flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {status === 'submitting' ? 'Joining...' : (
                       <>
-                        <Gift size={20} className="" />
-                        Join the Society
+                        <Gift size={18} className="text-cafe-gold" />
+                        Join The Inner Circle
                       </>
                     )}
                   </button>
@@ -100,7 +107,7 @@ export default function Loyalty() {
             </AnimatePresence>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {perks.map((perk, idx) => (
               <motion.div
                 key={perk.title}
@@ -108,15 +115,28 @@ export default function Loyalty() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="p-8 bg-white/60 backdrop-blur-md rounded-[2.5rem] border border-white group hover:bg-white transition-all shadow-xl shadow-cafe-brown/5"
+                className="p-10 bg-white/5 backdrop-blur-xl rounded-[3rem] border border-white/10 group hover:bg-white/10 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
-                <div className="w-14 h-14 bg-cafe-brown/10 text-cafe-brown rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
+                <div className="w-16 h-16 bg-cafe-gold/20 text-cafe-gold rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-cafe-gold group-hover:text-white transition-all shadow-lg border border-cafe-gold/30">
                   {perk.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-cafe-dark">{perk.title}</h3>
-                <p className="text-sm text-cafe-dark/60 leading-relaxed font-medium">{perk.desc}</p>
+                <h3 className="text-2xl font-black mb-4 text-white uppercase tracking-tight">{perk.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed font-medium line-clamp-3">{perk.desc}</p>
               </motion.div>
             ))}
+            
+            {/* VIP Status Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="p-10 bg-linear-to-br from-cafe-gold/20 to-cafe-primary/20 backdrop-blur-xl rounded-[3rem] border border-cafe-gold/30 flex flex-col justify-center items-center text-center relative overflow-hidden group col-span-1 sm:col-span-1"
+            >
+              <div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
+              <Award size={48} className="text-cafe-gold mb-6 relative z-10" />
+              <div className="text-white font-black text-4xl mb-2 relative z-10">VIP</div>
+              <p className="text-white/60 text-[10px] uppercase font-black tracking-widest relative z-10 mt-2">Elevated Status</p>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -65,46 +65,57 @@ export default function Wendy() {
             className="absolute bottom-20 right-0 w-[90vw] md:w-96 bg-white rounded-3xl shadow-2xl border border-cafe-brown/10 overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-cafe-brown p-6 text-white flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-cafe-cream/20 rounded-full flex items-center justify-center">
-                  <Bot size={24} className="text-cafe-cream" />
+            <div className="bg-cafe-brown p-8 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-cafe-gold/20 rounded-full blur-3xl -mr-16 -mt-16" />
+              <div className="relative z-10 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20">
+                      <Bot size={32} className="text-cafe-gold" />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-cafe-primary rounded-full border-2 border-cafe-brown" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-xl tracking-tight leading-none uppercase italic">Wendy</h4>
+                    <p className="text-cafe-gold text-[10px] font-black uppercase tracking-[0.2em] mt-1">Coffee Expert</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg leading-none">Wendy</h4>
-                  <p className="text-cafe-cream/60 text-xs mt-1">AI Barista Specialist</p>
-                </div>
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-all border border-white/10"
+                >
+                  <X size={20} />
+                </button>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="hover:bg-white/10 p-2 rounded-full transition-colors"
-              >
-                <X size={20} />
-              </button>
             </div>
 
             {/* Chat Messages */}
             <div 
               ref={scrollRef}
-              className="h-96 overflow-y-auto p-6 space-y-4 bg-cafe-cream/10"
+              className="h-[400px] overflow-y-auto p-6 space-y-6 bg-cafe-dark/5"
             >
+              <div className="text-center mb-6">
+                <span className="px-3 py-1 bg-cafe-brown/5 rounded-full text-[9px] font-black uppercase tracking-widest text-cafe-brown/40">
+                  Secure Chat Session
+                </span>
+              </div>
               {messages.map((msg, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: msg.role === 'user' ? 20 : -20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`flex gap-2 max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
+                  <div className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-lg ${
                       msg.role === 'user' ? 'bg-cafe-gold text-white' : 'bg-cafe-brown text-white'
                     }`}>
-                      {msg.role === 'user' ? <User size={16} /> : <Sparkles size={16} />}
+                      {msg.role === 'user' ? <User size={18} /> : <Sparkles size={18} />}
                     </div>
-                    <div className={`p-4 rounded-2xl text-sm leading-relaxed ${
+                    <div className={`p-4 rounded-3xl text-sm leading-relaxed shadow-xl ${
                       msg.role === 'user' 
-                        ? 'bg-cafe-gold text-white rounded-tr-none shadow-md shadow-cafe-gold/20' 
-                        : 'bg-white text-cafe-dark rounded-tl-none border border-cafe-brown/5 shadow-sm'
+                        ? 'bg-cafe-primary text-white rounded-tr-none' 
+                        : 'bg-white text-cafe-dark rounded-tl-none border border-cafe-brown/5'
                     }`}>
                       {msg.content}
                     </div>
@@ -113,15 +124,15 @@ export default function Wendy() {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="flex gap-2 max-w-[80%]">
-                    <div className="w-8 h-8 rounded-full bg-cafe-brown text-white flex items-center justify-center shrink-0">
-                      <Sparkles size={16} />
+                  <div className="flex gap-3 max-w-[80%]">
+                    <div className="w-9 h-9 rounded-xl bg-cafe-brown text-white flex items-center justify-center shrink-0 shadow-lg">
+                      <Sparkles size={18} />
                     </div>
-                    <div className="bg-white p-4 rounded-2xl rounded-tl-none border border-cafe-brown/5 shadow-sm">
-                      <div className="flex gap-1">
-                        <span className="w-1.5 h-1.5 bg-cafe-brown/30 rounded-full animate-bounce" />
-                        <span className="w-1.5 h-1.5 bg-cafe-brown/30 rounded-full animate-bounce [animation-delay:0.2s]" />
-                        <span className="w-1.5 h-1.5 bg-cafe-brown/30 rounded-full animate-bounce [animation-delay:0.4s]" />
+                    <div className="bg-white p-5 rounded-3xl rounded-tl-none border border-cafe-brown/5 shadow-inner">
+                      <div className="flex gap-1.5">
+                        <span className="w-2 h-2 bg-cafe-gold rounded-full animate-bounce" />
+                        <span className="w-2 h-2 bg-cafe-gold rounded-full animate-bounce [animation-delay:0.2s]" />
+                        <span className="w-2 h-2 bg-cafe-gold rounded-full animate-bounce [animation-delay:0.4s]" />
                       </div>
                     </div>
                   </div>
@@ -130,24 +141,24 @@ export default function Wendy() {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-white border-t border-cafe-brown/5">
+            <div className="p-6 bg-white border-t border-cafe-brown/5 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
               <form 
                 onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-                className="flex gap-2"
+                className="flex gap-3"
               >
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about our coffee..."
-                  className="flex-1 bg-cafe-cream/20 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-cafe-gold/50 placeholder:text-cafe-dark/30"
+                  placeholder="Ask for a recommendation..."
+                  className="flex-1 bg-cafe-cream/30 px-6 py-4 rounded-2xl text-sm focus:outline-none ring-1 ring-cafe-brown/5 focus:ring-2 focus:ring-cafe-primary transition-all placeholder:text-cafe-dark/20 text-cafe-dark font-medium"
                 />
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className="bg-cafe-dark text-white p-3 rounded-xl hover:bg-cafe-brown transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-cafe-primary text-white p-4 rounded-2xl shadow-lg shadow-cafe-primary/20 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
-                  <Send size={20} />
+                  <Send size={22} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </button>
               </form>
             </div>
@@ -159,7 +170,7 @@ export default function Wendy() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-16 h-16 bg-cafe-brown text-white rounded-full flex items-center justify-center shadow-2xl relative group overflow-hidden"
+        className="w-20 h-20 bg-cafe-primary text-white rounded-[2rem] flex items-center justify-center shadow-2xl relative group overflow-hidden border-2 border-white/10"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -169,7 +180,7 @@ export default function Wendy() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
             >
-              <X size={28} />
+              <X size={32} />
             </motion.div>
           ) : (
             <motion.div
@@ -178,11 +189,11 @@ export default function Wendy() {
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
             >
-              <MessageSquare size={28} />
+              <MessageSquare size={32} />
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </motion.button>
     </div>
   );

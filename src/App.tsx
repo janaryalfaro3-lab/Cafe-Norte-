@@ -13,7 +13,7 @@ import Gallery from './components/Gallery';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Background3D from './components/Background3D';
+import GlobalBackground from './components/GlobalBackground';
 import Wendy from './components/Wendy';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WishlistProvider } from './contexts/WishlistContext';
@@ -22,7 +22,7 @@ export default function App() {
   return (
     <WishlistProvider>
       <div className="relative overflow-x-hidden pt-16">
-        <Background3D />
+        <GlobalBackground />
         
         <Navbar />
 
